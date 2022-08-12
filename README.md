@@ -18,8 +18,10 @@ Customers at Telco are churning. This project is designed to identify key driver
 #### Hypothesis:
 Ho1 -> There is no association between churn and a customer having fiber optic
 Ha1 -> There is an association between churn and a customer having fiber optic
+
 Ho2 -> There is no association between churn and a customer having paperless billing
 Ha2 -> There is an association between churn and a customer having paperless billing
+
 HoFinal -> There is a less than or equal probability of churn if a customer haspaperless billing and fiber optic than if they do not
 HaFinal -> There is a larger probability of churn if a customer has paperlessbilling and fiber optic than if they do not
 
@@ -41,6 +43,7 @@ Churn!
 -----
 ### Data Dictionary
 (table with attribue, definition, and data type)
+
 -----
 ### Data Aquisition and Preparation
 Data was wrangled using the files listed below. All data was gathered from the Telco schema in the CodeUp database. This data was accessed via a function in the acquire.py file that accesses MySQL and runs a SQL query. The data was prepared by:
@@ -52,8 +55,9 @@ Data was wrangled using the files listed below. All data was gathered from the T
 - Split the data into train (60%), validate (20%), and test (20%) datasets
 
 Files used:
-    - acquire.py
-    - prepare.py
+ - acquire.py
+ - prepare.py
+ 
 -----
 ### Data Exploration
 Files used:
@@ -101,10 +105,10 @@ Will run the following regression models:
 Other indicators of model performance:
     - indicator and why it is important
 
-##### Model 1: type
+#### Model 1: type
 Results
 
-##### Model 2: type
+#### Model 2: type
 Results
 
 ### Selecting the Best Model:
