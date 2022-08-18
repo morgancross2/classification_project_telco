@@ -51,7 +51,7 @@ Add the below to your env.py and fill in your individual access information as s
 -----
 ### Data Dictionary
 | Feature Name | Type | Description |
-| ---- | ---- | ---- | ---- |
+| ---- | ---- | ---- |
 | churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
 | contract_type | int | 12 for month-to-month contract, 1 for 1 year contract, 2 for 2 year contract |
 | customer_id | object | individual customer identifier |
