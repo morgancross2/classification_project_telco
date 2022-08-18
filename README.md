@@ -28,21 +28,41 @@ HaFinal -> There is a larger probability of churn if a customer has paperlessbil
 #### Target Variable:
 Churn!
 
-#### Need to haves (Deliverables):
-1. Readme.md (here we are!)
-2. Final Report (.ipynb)
-3. Acquire & Prepare Modules (.py)
-4. Predictions (.csv)
-5. Any extra working notebooks
+#### How to Recreate:
+Utilize the following files found in this repository:
+- final_report.ipynb
+- acquire.py
+- prepare.py
+- explore.py
+- model.py
 
-#### Nice to haves (With more time):
+To access the correct MySQL database, you will need credentials to access to the CodeUp database.
+This database is accessed in this project via an env.py file.
+Add the below to your env.py and fill in your individual access information as strings:
+ - user = 'your_user_name'
+ - password = 'your_password'
+ - host = 'the_codeup_db'
+
+
 
 -----
 ### Key Findings:
 
 -----
 ### Data Dictionary
-(table with attribue, definition, and data type)
+| Feature Name | Type | Description |
+| ---- | ---- | ---- | ---- |
+| churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
+| contract_type | int | 12 for month-to-month contract, 1 for 1 year contract, 2 for 2 year contract |
+| customer_id | object | individual customer identifier |
+| DSL | int | 0 if the customer does not have DSL, 1 if they do |
+| extras | int | count of add-on services the customer is subscribed to (online security, online backup, device protection, tech support, streaming tv, streaming movies) | 
+| Fiber optic | int | 0 if the customer does not have fiber optic, 1 if they do |
+| monthly_charges | float | price of monthly services charged to the customer each month |
+| paperless_billing | int | 0 if customer does not have paperless billing, 1 if they do |
+| senior_citizen | int | 0 for non-senior citizen customers, 1 for senior citizens |
+| tenure | int  | years customer has been with telco |
+
 
 -----
 ### Data Aquisition and Preparation
@@ -57,7 +77,7 @@ Data was wrangled using the files listed below. All data was gathered from the T
 Files used:
  - acquire.py
  - prepare.py
- 
+
 -----
 ### Data Exploration
 Files used:
@@ -82,8 +102,8 @@ Takeaways from exploration:
 The null hypothesis is
 The alternate hypothesis is
 
-#### Confidence level: 95%
-#### Alpha: 0.05
+Confidence level: 95%
+Alpha: 0.05
 
 #### Results:
 
