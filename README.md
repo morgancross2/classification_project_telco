@@ -230,7 +230,7 @@ It makes sense that there is more churn in the early years of tenure as customer
 - explore.py
 - model.py
 
-2. To access the correct MySQL database, you will need credentials to access to the CodeUp database.
+2. To access the data, you will need credentials to access to the CodeUp database saved in an env.py file.
 Create your personal env.py file with your credentials saved as strings. (user, password, host)
 
 3. Run the final_report.ipynb notebook.
