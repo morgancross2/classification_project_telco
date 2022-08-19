@@ -73,25 +73,6 @@ This project is designed to identify key drivers of customer churn and develop a
 - I recommend evaluating fiber optic customers' experience early and often. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function.
 
 -----
-## Data Dictionary
-| Target | Type | Description |
-| ---- | ---- | ---- |
-| churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
-
-| Feature Name | Type | Description |
-| ---- | ---- | ---- |
-| contract_type | int | 12 for month-to-month contract, 1 for 1 year contract, 2 for 2 year contract |
-| customer_id | object | individual customer identifier |
-| DSL | int | 0 if the customer does not have DSL, 1 if they do |
-| extras | int | count of add-on services the customer is subscribed to (online security, online backup, device protection, tech support, streaming tv, streaming movies) | 
-| Fiber optic | int | 0 if the customer does not have fiber optic, 1 if they do |
-| monthly_charges | float | price of monthly services charged to the customer each month |
-| paperless_billing | int | 0 if customer does not have paperless billing, 1 if they do |
-| senior_citizen | int | 0 for non-senior citizen customers, 1 for senior citizens |
-| tenure | int  | years customer has been with telco |
-
-
------
 ## Planning
  - Create README, final_report.ipynb, working_report.ipynb
  - Bring over functional acquire.py, prepare.py, explore.py, and model.py files
