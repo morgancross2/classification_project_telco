@@ -138,52 +138,46 @@ Takeaways from exploration:
 - A T-Test evaluates if there is a difference in the means of two continuous variables. This test is looking at a two samples and one tail.
 - This test returns a p-value and a t-statistic.
 - This test will compare the monthly charges of customers that have churned against the monthly charges of customers that have not churned.
+- Confidence level is 95%
+- Alpha is 0.05
 
 Hypothesis:
  - The null hypothesis is the mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned.
  - The alternate hypothesis is the mean of monthly charges for churned customers greater than the mean of customers that have not churned.
 
-Confidence level: 95% -> Alpha = 0.05
-
 Results: 
 - p-value is less than alpha
 - t-statistic is positive
-
-Findings: 
 - I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
 
 ### Test 2: Chi-Square - Fiber optic vs Churn
 - This test evaluates if there is an association between two categorical variables.
 - This test returns a chi2-value, a p-value, the degrees of freedom, and the expected outcome.
 - This test will compare the fiber optic feature and the churn feature.
+- Confidence level is 95%
+- Alpha is 0.05
 
 Hypothesis:
 - The null hypothesis is there is no association between a customer having fiber optic and a customer churning.
 - The alternative hypothesis is there is an association between a customer having fiber optic and a customer churning.
 
-Confidence level: 95% -> Alpha = 0.05
-
 Results: 
 - p-value is less than alpha
-
-Findings: 
 - I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
 
 ### Test 3: Chi-Square - Tenure vs Churn
 - This test evaluates if there is an association between two categorical variables.
 - This test returns a chi2-value, a p-value, the degrees of freedom, and the expected outcome.
 - This test will compare the tenure feature and the churn feature.
+- Confidence level is 95%
+- Alpha is 0.05
 
 Hypothesis:
 - The null hypothesis is there is not an association between tenure and churn.
 - The alternative hypothesis is there is an association between tenure and churn.
 
-Confidence level: 95% -> Alpha = 0.05
-
 Results: 
 - p-value is less than alpha
-
-Findings: 
 - I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
