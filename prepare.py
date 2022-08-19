@@ -6,30 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
 
-def prep_iris(df):
-    '''
-    This function accepts the iris df and preps it.
-    '''
-    df = df.drop(columns=['species_id', 'measurement_id'])
-    df = df.rename(columns={'species_name':'species'})
-    dummies = pd.get_dummies(df.species)
-    df = pd.concat([df, dummies], axis=1)
-    
-    return df
-
-
-def prep_titanic(df):
-    '''
-    This function accepts the titanic df and preps it. 
-    '''
-    df = df.drop(columns=['age','deck','embarked','class'])
-    dummy_df = pd.get_dummies(df[['sex', 'embark_town']], drop_first=True)
-    df = pd.concat([df, dummy_df], axis=1)
-    df = df.drop(columns=['sex', 'embark_town'])
-    
-    return df
-
-
 def prep_telco(telco):
     '''
     This function accepts the telco df and preps it.

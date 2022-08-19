@@ -85,12 +85,12 @@ def binary_randomforest_data(X_train, y_train):
         y_train = target variable column as a series
         
     Returns a DataFrame running random forest models with confusion matrix data
-    from 2 to 9 depth and 1 to 4 min sample leaf.
+    from 2 to 20 depth (increment by 2) and 1 to 30 (increment by 5) min sample leaf.
     '''
     forests = {}
     z = 1
-    for i in range(2,10):
-        for x in range(1,5):
+    for i in range(2,20,2):
+        for x in range(1,31,5):
             forest = RandomForestClassifier(max_depth=i, min_samples_leaf=x, random_state=123)
             forest.fit(X_train, y_train)
     
