@@ -50,17 +50,17 @@ Project Deliverables:
 | tenure | int  | years customer has been with telco |
 
 #### Hypothesis:
-Ho1 -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
-Ha1 -> The mean of monthly charges for churned customers greater than the mean of customers that have not churned
+$H_O$1 -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
+$H_a$1 -> The mean of monthly charges for churned customers greater than the mean of customers that have not churned
 Outcome: I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
 
-Ho2 -> There is no association between a customer having fiber optic and a customer churning
-Ha2 -> There is an association between a customer having fiber optic and a customer churning
-Outcome -> I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
+- $H_0$2 -> There is no association between a customer having fiber optic and a customer churning
+- $H_a$2 -> There is an association between a customer having fiber optic and a customer churning
+- Outcome -> I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
 
-Ho3 -> There is not an association between tenure and churn
-Ha3 -> There is an association between tenure and churn
-Outcome -> I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
+- $H_O$3 -> There is not an association between tenure and churn
+- $H_a$3 -> There is an association between tenure and churn
+- Outcome -> I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
 ### Executive Summary:
