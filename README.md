@@ -50,16 +50,20 @@ Project Deliverables:
 | tenure | int  | years customer has been with telco |
 
 #### Hypothesis:
-$H_O$1 -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
-$H_a$1 -> The mean of monthly charges for churned customers greater than the mean of customers that have not churned
-Outcome: I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
 
-- $H_0$2 -> There is no association between a customer having fiber optic and a customer churning
-- $H_a$2 -> There is an association between a customer having fiber optic and a customer churning
+1. 
+- Ho -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
+- Ha -> The mean of monthly charges for churned customers greater than the mean of customers that have not churned
+- Outcome: I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
+
+2. 
+- Ho2 -> There is no association between a customer having fiber optic and a customer churning
+- Ha2 -> There is an association between a customer having fiber optic and a customer churning
 - Outcome -> I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
 
-- $H_O$3 -> There is not an association between tenure and churn
-- $H_a$3 -> There is an association between tenure and churn
+3. 
+- Ho3 -> There is not an association between tenure and churn
+- Ha3 -> There is an association between tenure and churn
 - Outcome -> I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
@@ -108,14 +112,15 @@ Files used:
  - acquire.py
  - prepare.py
 
-- I utilized my get_telco_data function from my acquire.py file. This function gathers the data from the Telco schema in the CodeUp database via an SQL query.
-- I utilized my prep_telco function from my prepare.py file. This function:
+Steps taken:
+ - I utilized my get_telco_data function from my acquire.py file. This function gathers the data from the Telco schema in the CodeUp database via an SQL query.
+ - I utilized my prep_telco function from my prepare.py file. This function:
     - handles nulls (there were none)
     - drops the foreign id columns
     - casts monetary columns to floats
     - enumerates binomial features to 0 (false) and 1 (true) for ease of exploration and modeling (See Data Dictionary above for details.)
-- I feature engineered a column named 'extras'. This column contains a count of all add-on subscriptions customers may add. The amount of extras may play a role in churn. More to be explored in the next step. 
-- Before moving to exploration, I split the data into train (60%), validatev(20%), and test (20%) datasets; these were stratified for the target: churn.
+ - I feature engineered a column named 'extras'. This column contains a count of all add-on subscriptions customers may add. The amount of extras may play a role in churn. More to be explored in the next step. 
+ - Before moving to exploration, I split the data into train (60%), validatev(20%), and test (20%) datasets; these were stratified for the target: churn.
 
 -----
 ### Data Exploration
@@ -136,18 +141,17 @@ Takeaways from exploration:
 - This test will compare the monthly charges of customers that have churned against the monthly charges of customers that have not churned.
 
 Hypothesis:
-The null hypothesis is the mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned.
-The alternate hypothesis is the mean of monthly charges for churned customers greater than the mean of customers that have not churned.
+ - The null hypothesis is the mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned.
+ - The alternate hypothesis is the mean of monthly charges for churned customers greater than the mean of customers that have not churned.
 
-Confidence level: 95%
-Alpha: 0.05
+Confidence level: 95% -> Alpha = 0.05
 
 Results: 
 - p-value is less than alpha
 - t-statistic is positive
 
 Findings: 
-I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
+- I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
 
 #### Test 2: Chi-Square - Fiber optic vs Churn
 - This test evaluates if there is an association between two categorical variables.
@@ -155,17 +159,16 @@ I rejected the Null Hypothesis, suggesting the mean of monthly charges for churn
 - This test will compare the fiber optic feature and the churn feature.
 
 Hypothesis:
-The null hypothesis is there is no association between a customer having fiber optic and a customer churning.
-The alternative hypothesis is there is an association between a customer having fiber optic and a customer churning.
+- The null hypothesis is there is no association between a customer having fiber optic and a customer churning.
+- The alternative hypothesis is there is an association between a customer having fiber optic and a customer churning.
 
-Confidence level: 95%
-Alpha: 0.05
+Confidence level: 95% -> Alpha = 0.05
 
 Results: 
 - p-value is less than alpha
 
 Findings: 
-I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
+- I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
 
 #### Test 3: Chi-Square - Tenure vs Churn
 - This test evaluates if there is an association between two categorical variables.
@@ -173,17 +176,16 @@ I rejected the Null Hypothesis, suggesting there is an association between a cus
 - This test will compare the tenure feature and the churn feature.
 
 Hypothesis:
-The null hypothesis is there is not an association between tenure and churn.
-The alternative hypothesis is there is an association between tenure and churn.
+- The null hypothesis is there is not an association between tenure and churn.
+- The alternative hypothesis is there is an association between tenure and churn.
 
-Confidence level: 95%
-Alpha: 0.05
+Confidence level: 95% -> Alpha = 0.05
 
 Results: 
 - p-value is less than alpha
 
 Findings: 
-I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
+- I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
 ### Modeling:
@@ -191,8 +193,8 @@ I rejected the Null Hypothesis, suggesting there is an association between tenur
 
 #### Baseline:
 Baseline Results
-Train churn feature's mode is 0, not churning.
-The baseline accuracy is 73.47%.
+- Train churn feature's mode is 0, not churning.
+- The baseline accuracy is 73.47%.
 
 Selected features to input into models:
 - DSL
@@ -222,7 +224,7 @@ Hyperparameters:
 ### Selecting the Best Model:
 | Model | Train Accuracy | Validate Accuracy | Train Recall | Validate Recall |
 | ---- | ----| ---- | ---- | ---- |
-| Baseline |  |  |  |  |
+| Baseline | .734675 | n/a | .734564 | n/a |
 | Logistic Regression | 0.752426 | 0.765791	| 0.742194 | 0.783422 |
 | Random Forest | 0.817278 | 0.808375 | 0.533452 | 0.516043 |
 | K-Nearest Neighbors | 0.840237 | 0.776437 | 0.624442 | 0.524064 | 
@@ -230,8 +232,8 @@ Hyperparameters:
 The Logistic Regression model performed the best for recall.
 
 ### Testing the Model:
-Test Accuracy: 0.759404
-Test Recall: 0.778075
+- Test Accuracy: 0.759404
+- Test Recall: 0.778075
 
 ### Conclusion:
 It makes sense that there is more churn in the early years of tenure as customers find services that best suit their situation or take advantage of a new customer deal. However, despite this early spike in churn, fiber optic customers consistently churn at a higher rate throughout all tenure lengths. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function. It is this feature that should be addressed. 
