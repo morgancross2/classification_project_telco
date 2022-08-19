@@ -5,10 +5,9 @@ by: Morgan Cross
 This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn. 
 
 -----
-### Project Planning:
-#### Project Overview:
+### Project Overview:
 
-Objectives:
+#### Objectives:
 - Document code, process (data acquistion, preparation, exploratory data analysis and statistical testing, modeling, and model evaluation), findings, and key takeaways in a Jupyter Notebook Final Report.
 - Create modules (acquire.py, prepare.py) that make the process repeateable and the report (notebook) easier to read and follow.
 - Ask exploratory questions of the data that will help you understand more about the attributes and drivers of customers churning. Answer questions through charts and statistical tests.
@@ -16,15 +15,15 @@ Objectives:
 - Refine work into a Report, in the form of a jupyter notebook, that you will walk through in a 5 minute presentation to a group of collegues and managers about the work you did, why, goals, what you found, your methdologies, and your conclusions.
 - Be prepared to answer panel questions about your code, process, findings and key takeaways, and model.
 
-Business Goals:
+#### Business Goals:
 - Find drivers for customer churn at Telco. Why are customers churning?
 - Construct a ML classification model that accurately predicts customer churn.
 - Deliver a report that a non-data scientist can read through and understand what steps were taken, why and what was the outcome?
 
-Audience:
+#### Audience:
 - Peers, direct manager, and their manager
 
-Project Deliverables:
+#### Project Deliverables:
 - this README.md walking through the project details
 - final_report.ipynb displaying the process, findings, models, key takeaways, recommendation and conclusion
 - acquire.py with all data acquisition functions used
@@ -32,7 +31,7 @@ Project Deliverables:
 - predictions.csv with the best models probability of churn and prediction of churn for each customer in the test dataset
 - working_report.ipynb showing all work throughout the pipeline
 
-#### Data Dictionary:
+### Data Dictionary:
 | Target | Type | Description |
 | ---- | ---- | ---- |
 | churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
@@ -49,7 +48,7 @@ Project Deliverables:
 | senior_citizen | int | 0 for non-senior citizen customers, 1 for senior citizens |
 | tenure | int  | years customer has been with telco |
 
-#### Hypothesis:
+### Hypothesis:
 
 1. 
 - Ho -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
@@ -67,14 +66,14 @@ Project Deliverables:
 - Outcome -> I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
-### Executive Summary:
+## Executive Summary:
 - The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall. Every model beat the baseline accuracy and would better predict churn. 
 - Due to wanting to capture every possible customer churning, the best model is the model that maximizes recall. The Logistic Regression model produced the best results at 79% recall.
 - With more time, I predict feature engineering data to show time from subscribing to fiber optic to time of churn would increase the model's recall rate.
 - I recommend evaluating fiber optic customers' experience early and often. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function.
 
 -----
-### Data Dictionary
+## Data Dictionary
 | Target | Type | Description |
 | ---- | ---- | ---- |
 | churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
@@ -93,7 +92,7 @@ Project Deliverables:
 
 
 -----
-### Planning
+## Planning
  - Create README, final_report.ipynb, working_report.ipynb
  - Bring over functional acquire.py, prepare.py, explore.py, and model.py files
  - Acquire the data from the Code Up database via the acquire.py function
@@ -107,7 +106,7 @@ Project Deliverables:
  - Develop and document all findings, takeaways, recommendations and next steps. 
 
 -----
-### Data Aquisition and Preparation
+## Data Aquisition and Preparation
 Files used:
  - acquire.py
  - prepare.py
@@ -123,7 +122,7 @@ Steps taken:
  - Before moving to exploration, I split the data into train (60%), validatev(20%), and test (20%) datasets; these were stratified for the target: churn.
 
 -----
-### Data Exploration
+## Data Exploration
 Files used:
 - explore.py
 
@@ -133,9 +132,9 @@ Takeaways from exploration:
 - When controling for tenure, this theme continues. More fiber optic customers churn than non-fiber optic customers. 
 
 -----
-### Statistical Analysis
+## Statistical Analysis
 
-#### Test 1: T-Test - Churned monthly charges vs Non-churned monthly charges
+### Test 1: T-Test - Churned monthly charges vs Non-churned monthly charges
 - A T-Test evaluates if there is a difference in the means of two continuous variables. This test is looking at a two samples and one tail.
 - This test returns a p-value and a t-statistic.
 - This test will compare the monthly charges of customers that have churned against the monthly charges of customers that have not churned.
@@ -153,7 +152,7 @@ Results:
 Findings: 
 - I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
 
-#### Test 2: Chi-Square - Fiber optic vs Churn
+### Test 2: Chi-Square - Fiber optic vs Churn
 - This test evaluates if there is an association between two categorical variables.
 - This test returns a chi2-value, a p-value, the degrees of freedom, and the expected outcome.
 - This test will compare the fiber optic feature and the churn feature.
@@ -170,7 +169,7 @@ Results:
 Findings: 
 - I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
 
-#### Test 3: Chi-Square - Tenure vs Churn
+### Test 3: Chi-Square - Tenure vs Churn
 - This test evaluates if there is an association between two categorical variables.
 - This test returns a chi2-value, a p-value, the degrees of freedom, and the expected outcome.
 - This test will compare the tenure feature and the churn feature.
@@ -188,10 +187,10 @@ Findings:
 - I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
 
 -----
-### Modeling:
-#### Model Preparation:
+## Modeling:
+### Model Preparation:
 
-#### Baseline:
+### Baseline:
 Baseline Results
 - Train churn feature's mode is 0, not churning.
 - The baseline accuracy is 73.47%.
@@ -204,19 +203,19 @@ Selected features to input into models:
 - tenure
 - extras
 
-#### Model 1: Logistic Regression
+### Model 1: Logistic Regression
 Hyperparameters:
 - C = 1.0
 - frequency = 0.3
 - random_state = 123
 
-#### Model 2: Random Forest
+### Model 2: Random Forest
 Hyperparameters:
 - max_depth = 7
 - min_samples_leaf = 3
 - random_state = 123
 
-#### Model 3: K-Nearest Neighbors
+### Model 3: K-Nearest Neighbors
 Hyperparameters:
 - n_neighbors = 5
 - weights = uniform
@@ -235,7 +234,8 @@ The Logistic Regression model performed the best for recall.
 - Test Accuracy: 0.759404
 - Test Recall: 0.778075
 
-### Conclusion:
+-----
+## Conclusion:
 It makes sense that there is more churn in the early years of tenure as customers find services that best suit their situation or take advantage of a new customer deal. However, despite this early spike in churn, fiber optic customers consistently churn at a higher rate throughout all tenure lengths. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function. It is this feature that should be addressed. 
 
 #### Recommendations: 
@@ -246,8 +246,8 @@ It makes sense that there is more churn in the early years of tenure as customer
  - Feature engineer sample populations where the cluster of churn is at for a collection of features. I would first isolate customers with low-tenure and high monthly charges and see how this additional identifier adjusted the model outcomes. 
  - Feature engineer data to show the last added on service before churn and the difference in dates between the addition and churning. This information could shed light on a specific service lowering customer satisfaction.
 
-
-### How to Recreate:
+-----
+## How to Recreate:
 1. Utilize the following files found in this repository:
 - final_report.ipynb
 - acquire.py
