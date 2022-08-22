@@ -193,22 +193,14 @@ Selected features to input into models:
 - tenure
 - extras
 
-### Model 1: Logistic Regression
-Hyperparameters:
-- C = 1.0
-- frequency = 0.3
-- random_state = 123
+##### Model 1: Logistic Regression
+Hyperparameters: C = 1.0, frequency = 0.3, random_state = 123
 
-### Model 2: Random Forest
-Hyperparameters:
-- max_depth = 7
-- min_samples_leaf = 3
-- random_state = 123
+##### Model 2: Random Forest
+Hyperparameters: max_depth = 7, min_samples_leaf = 3, random_state = 123
 
-### Model 3: K-Nearest Neighbors
-Hyperparameters:
-- n_neighbors = 5
-- weights = uniform
+##### Model 3: K-Nearest Neighbors
+Hyperparameters: n_neighbors = 5, weights = uniform
 
 ### Selecting the Best Model:
 | Model | Train Accuracy | Validate Accuracy | Train Recall | Validate Recall |
@@ -222,6 +214,7 @@ The Logistic Regression model performed the best for recall.
 
 ### Testing the Model:
 | Model | Test Accuracy | Test Recall |
+| ---- | ---- | ---- |
 | Logistic Regression | 0.759404 | 0.778075 |
 
 -----
