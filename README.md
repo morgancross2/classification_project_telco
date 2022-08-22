@@ -1,11 +1,10 @@
 # Telco Churn Classification Project
 by: Morgan Cross
 
-### Project Description:
 This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn so that business leaders and decision makers can develop courses of action to best address these drivers and retain customers. 
 
 -----
-### Project Overview:
+## Project Overview:
 
 #### Objectives:
 - Document code, process (data acquistion, preparation, exploratory data analysis and statistical testing, modeling, and model evaluation), findings, and key takeaways in a Jupyter Notebook Final Report.
@@ -39,7 +38,7 @@ This project is designed to identify key drivers of customer churn and develop a
 - I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
 
 -----
-### Data Dictionary:
+## Data Dictionary:
 | Target | Type | Description |
 | ---- | ---- | ---- |
 | churn | int | 0 if the customer is still with the company, 1 if they have left/churned |
@@ -126,14 +125,6 @@ Questions Addressed:
 2. Is fiber optic a driver of churn?
 3. How does tenure effect churn?
 
-Takeaways from exploration:
-- Increased monthly charges, having fiber optic, and early in tenure all lead to higher rates of churn. 
-- A disporportionatly high number of customers that churn, have fiber optic when compared to customers that do not churn. 
-- When controling for tenure, this theme continues. More fiber optic customers churn than non-fiber optic customers. 
-
------
-## Statistical Analysis
-
 ### Test 1: T-Test - Churned monthly charges vs Non-churned monthly charges
 - A T-Test evaluates if there is a difference in the means of two continuous variables. This test is looking at a two samples and one tail.
 - This test returns a p-value and a t-statistic.
@@ -179,6 +170,11 @@ Hypothesis:
 Results: 
 - p-value is less than alpha
 - I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
+
+### Takeaways from exploration:
+- Increased monthly charges, having fiber optic, and early in tenure all lead to higher rates of churn. 
+- A disporportionatly high number of customers that churn, have fiber optic when compared to customers that do not churn. 
+- When controling for tenure, this theme continues. More fiber optic customers churn than non-fiber optic customers. 
 
 -----
 ## Modeling:
