@@ -193,13 +193,13 @@ Selected features to input into models:
 - tenure
 - extras
 
-##### Model 1: Logistic Regression
+#### Model 1: Logistic Regression
 Hyperparameters: C = 1.0, frequency = 0.3, random_state = 123
 
-##### Model 2: Random Forest
+#### Model 2: Random Forest
 Hyperparameters: max_depth = 7, min_samples_leaf = 3, random_state = 123
 
-##### Model 3: K-Nearest Neighbors
+#### Model 3: K-Nearest Neighbors
 Hyperparameters: n_neighbors = 5, weights = uniform
 
 ### Selecting the Best Model:
