@@ -9,23 +9,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 
-'''
-This file contains:
-    BINARY TARGET MODELS:
-        Classification:
-            - binary_decisiontree_data(X_train, y_train)
-            - binary_randomforest_data(X_train, y_train)
-            - binary_KNN_data(X_train, y_train, weight)
-            - binary_logisticregression_data(X_train, y_train, penalty='l2')
-        
-        Regression:
-        
-        Clustering:
-        
-        Time Series:
-        
-'''
-
 
 def binary_decisiontree_data(X_train, y_train):
     '''
@@ -397,12 +380,15 @@ def run_best_test(X_train, y_train, X_val, y_val, X_test, y_test, test):
     test_recall = met.recall_score(y_test, y_pred_test)
 
     # Put the results into a dataframe
-    best = pd.DataFrame({'logit3' : {'acc1_train': logit_accuracy,
-                             'acc2_val' : val_acc,
-                             'acc3_test' : test_acc,
-                             'recall1_train': logit_recall,
-                             'recall2_val': val_recall,
-                             'recall3_test': test_recall}})
+    best = pd.DataFrame({'Accuracy' : {
+                             'train': logit_accuracy,
+                             'validate' : val_acc,
+                             'test' : test_acc},
+                         'Recall' : {
+                             'train': logit_recall,
+                             'validate': val_recall,
+                             'test': test_recall}
+                        })
     
     odds = np.exp(pd.DataFrame(logit3.coef_[0], index=X_train.columns, columns=['weight_of_feature']))
     

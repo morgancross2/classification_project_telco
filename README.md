@@ -1,7 +1,7 @@
 # Telco Churn Classification Project
 by: Morgan Cross
 
-This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn so that business leaders and decision makers can develop courses of action to best address these drivers and retain customers. 
+This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn. The results from this project arms telco business leaders and decision makers with a focused direction to best address these drivers and retain customers. 
 
 -----
 ## Project Overview:
@@ -16,7 +16,7 @@ This project is designed to identify key drivers of customer churn and develop a
 
 #### Business Goals:
 - Find drivers for customer churn at Telco. Why are customers churning?
-- Construct a ML classification model that accurately predicts customer churn.
+- Construct a ML classification model that best predicts customer churn.
 - Deliver a report that a non-data scientist can read through and understand what steps were taken, why and what was the outcome?
 
 #### Audience:
