@@ -32,9 +32,9 @@ This project is designed to identify key drivers of customer churn and develop a
 
 -----
 ## Executive Summary:
-- The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall. Every model beat the baseline accuracy and would better predict churn. 
-- The Logistic Regression model produced the best results at 79% recall. Maximizing recall, which will predict the most churning customers and minimize false negatives, was selected as we begin looking into the recent wave of churning customers. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
-- With more time, I predict feature engineering data to show time from subscribing to fiber optic to time of churn would increase the model's recall rate.
+- The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall.
+- The Logistic Regression model produced the best results at 79% recall. Maximizing recall will predict the most churning customers and minimize false negatives. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
+- With more time, I predict feature engineering data to identify a subgroup of fiber optic users with high-monthly charges and low tenure would increase the model's recall rate.
 - I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
 
 -----
