@@ -2,7 +2,7 @@
 by: Morgan Cross
 
 ### Project Description:
-This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn. 
+This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn so that business leaders and decision makers can develop courses of action to best address these drivers and retain customers. 
 
 -----
 ### Project Overview:
@@ -68,13 +68,17 @@ This project is designed to identify key drivers of customer churn and develop a
 -----
 ## Executive Summary:
 - The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall. Every model beat the baseline accuracy and would better predict churn. 
-- Due to wanting to capture every possible customer churning, the best model is the model that maximizes recall. The Logistic Regression model produced the best results at 79% recall.
+- The Logistic Regression model produced the best results at 79% recall. Maximizing recall, which will predict the most churning customers and minimize false negatives, was selected as we begin looking into the recent wave of churning customers. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
 - With more time, I predict feature engineering data to show time from subscribing to fiber optic to time of churn would increase the model's recall rate.
-- I recommend evaluating fiber optic customers' experience early and often. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function.
+- I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
 
 -----
 ## Planning
- - Create README, final_report.ipynb, working_report.ipynb
+ - Create deliverables:
+     - README
+     - final_report.ipynb
+     - working_report.ipynb
+     - predictions.csv including customer id, probability of churn, and prediction of churn
  - Bring over functional acquire.py, prepare.py, explore.py, and model.py files
  - Acquire the data from the Code Up database via the acquire.py function
  - Prepare and split the data via the prepare.py functions
@@ -83,7 +87,6 @@ This project is designed to identify key drivers of customer churn and develop a
  - Fit and train three (3) classification models to predict churn on the train dataset.
  - Evaluate the models by comparing the train and validation data.
  - Select the best model and evaluate it on the train data.
- - Create a predictions csv for each observation in the test dataset using the best model's predictions. The csv should include the customer id, probability of staying, probability of churning, and prediction of churn.
  - Develop and document all findings, takeaways, recommendations and next steps. 
 
 -----
@@ -94,13 +97,20 @@ Files used:
 
 Steps taken:
  - I utilized my get_telco_data function from my acquire.py file. This function gathers the data from the Telco schema in the CodeUp database via an SQL query.
- - I utilized my prep_telco function from my prepare.py file. This function:
-    - handles nulls (there were none)
+ - In this step, I called prep_telco from my prepare.py file. This function 
+    - handles nulls
     - drops the foreign id columns
     - casts monetary columns to floats
-    - enumerates binomial features to 0 (false) and 1 (true) for ease of exploration and modeling (See Data Dictionary above for details.)
+    - enumerates columns's data for ease of exploration and modeling (See Data Dictionary above or in README for details.)
  - I feature engineered a column named 'extras'. This column contains a count of all add-on subscriptions customers may add. The amount of extras may play a role in churn. More to be explored in the next step. 
  - Before moving to exploration, I split the data into train (60%), validatev(20%), and test (20%) datasets; these were stratified for the target: churn.
+
+What happened to each feature?
+- internet_service_type_id, payment_type_id, and contract_type_id were dropped because they are foreign keys to other features that were merged to the table via the initial acquire query. 
+- total_charges with no entry were corrected to reflect 0. This feature was then casted into a float.
+- internet_service_type and payment_type were transformed via dummies. This change displays the categorical options for each feature in their own boolean-like columns with 1 for True and 0 for False.
+- contract_type, gender, partner, dependents, phone_service, paperless_billing, churn, multiple_lines, online_security, online_backup, device_protection, tech_support, streaming_tv, and streaming_movies features were transformed to display 1 for True and 0 for False in place of 'Yes' or 'No'.
+
 
 -----
 ## Data Exploration
