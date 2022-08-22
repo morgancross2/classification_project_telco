@@ -31,6 +31,14 @@ This project is designed to identify key drivers of customer churn and develop a
 - predictions.csv with the best models probability of churn and prediction of churn for each customer in the test dataset
 - working_report.ipynb showing all work throughout the pipeline
 
+-----
+## Executive Summary:
+- The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall. Every model beat the baseline accuracy and would better predict churn. 
+- The Logistic Regression model produced the best results at 79% recall. Maximizing recall, which will predict the most churning customers and minimize false negatives, was selected as we begin looking into the recent wave of churning customers. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
+- With more time, I predict feature engineering data to show time from subscribing to fiber optic to time of churn would increase the model's recall rate.
+- I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
+
+-----
 ### Data Dictionary:
 | Target | Type | Description |
 | ---- | ---- | ---- |
@@ -38,39 +46,35 @@ This project is designed to identify key drivers of customer churn and develop a
 
 | Feature Name | Type | Description |
 | ---- | ---- | ---- |
+| Bank transfer (automatic) | int | 0 if the customer does not use bank transfering, 1 if they do |
 | contract_type | int | 12 for month-to-month contract, 1 for 1 year contract, 2 for 2 year contract |
+| contract_type_id | int | foreign key to contract_type |
+| Credit card (automatic) | int | 0 if the customer does not use a credit card, 1 if they do |
 | customer_id | object | individual customer identifier |
+| dependents | int | 0 if the customer does not have dependents, 1 if they do |
+| device_protection | int | 0 if the customer does not have device protection, 1 if they do |
 | DSL | int | 0 if the customer does not have DSL, 1 if they do |
+| Electronic check | int | 0 if the customer does not use electronic checks, 1 if they do |
 | extras | int | count of add-on services the customer is subscribed to (online security, online backup, device protection, tech support, streaming tv, streaming movies) | 
 | Fiber optic | int | 0 if the customer does not have fiber optic, 1 if they do |
+| gender | int | 0 if the customer is female, 1 if they are male |
+| internet_service_type_id | int | foreign key to internet_service_type |
+| Mailed check | int | 0 if the customer does not use mailed checks, 1 if they do |
 | monthly_charges | float | price of monthly services charged to the customer each month |
+| multiple_lines | int | 0 if the customer does not have any lines, 1 if they have one line, 2 if they have two or more lines |
+| online_backup | int | 0 if the customer does not have online backup, 1 if they do |
+| online_security | int | 0 if the customer does not have online security, 1 if they do |
 | paperless_billing | int | 0 if customer does not have paperless billing, 1 if they do |
+| partner | int | 0 if the customer does not have a partner, 1 if they do |
+| payment_type | object | This feature gets broken down into: bank transfer, credit card, electronic check, and mailed check |
+| payment_type_id | int | foreign key to payment_type |
+| phone_service | int | 0 if the customer does not have phone service, 1 if they do |
 | senior_citizen | int | 0 for non-senior citizen customers, 1 for senior citizens |
+| streaming_movies | int | 0 if the customer does not have streaming movies, 1 if they do |
+| streaming_tv | int | 0 if the customer does not have streaming tv, 1 if they do |
+| tech_support | int | 0 if the customer does not have tech support, 1 if they do |
 | tenure | int  | years customer has been with telco |
-
-### Hypothesis:
-
-1. 
-- Ho -> The mean of monthly charges for churned customers is less than or equal to the mean of customers that have not churned
-- Ha -> The mean of monthly charges for churned customers greater than the mean of customers that have not churned
-- Outcome: I rejected the Null Hypothesis, suggesting the mean of monthly charges for churned customers is greater than those that have not churned.
-
-2. 
-- Ho2 -> There is no association between a customer having fiber optic and a customer churning
-- Ha2 -> There is an association between a customer having fiber optic and a customer churning
-- Outcome -> I rejected the Null Hypothesis, suggesting there is an association between a customer having fiber optic and churning.
-
-3. 
-- Ho3 -> There is not an association between tenure and churn
-- Ha3 -> There is an association between tenure and churn
-- Outcome -> I rejected the Null Hypothesis, suggesting there is an association between tenure and churn.
-
------
-## Executive Summary:
-- The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall. Every model beat the baseline accuracy and would better predict churn. 
-- The Logistic Regression model produced the best results at 79% recall. Maximizing recall, which will predict the most churning customers and minimize false negatives, was selected as we begin looking into the recent wave of churning customers. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
-- With more time, I predict feature engineering data to show time from subscribing to fiber optic to time of churn would increase the model's recall rate.
-- I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
+| total_charges | float | sum of all charges over the tenure of the customer |
 
 -----
 ## Planning
@@ -116,6 +120,11 @@ What happened to each feature?
 ## Data Exploration
 Files used:
 - explore.py
+
+Questions Addressed:
+1. Do monthly charges have a relationship with churn?
+2. Is fiber optic a driver of churn?
+3. How does tenure effect churn?
 
 Takeaways from exploration:
 - Increased monthly charges, having fiber optic, and early in tenure all lead to higher rates of churn. 
@@ -208,7 +217,7 @@ Hyperparameters:
 ### Selecting the Best Model:
 | Model | Train Accuracy | Validate Accuracy | Train Recall | Validate Recall |
 | ---- | ----| ---- | ---- | ---- |
-| Baseline | .734675 | n/a | .734564 | n/a |
+| Baseline | .734675 | .734564 | n/a | n/a |
 | Logistic Regression | 0.752426 | 0.765791	| 0.742194 | 0.783422 |
 | Random Forest | 0.817278 | 0.808375 | 0.533452 | 0.516043 |
 | K-Nearest Neighbors | 0.840237 | 0.776437 | 0.624442 | 0.524064 | 
@@ -216,16 +225,17 @@ Hyperparameters:
 The Logistic Regression model performed the best for recall.
 
 ### Testing the Model:
-- Test Accuracy: 0.759404
-- Test Recall: 0.778075
+| Model | Test Accuracy | Test Recall |
+| Logistic Regression | 0.759404 | 0.778075 |
 
 -----
 ## Conclusion:
-It makes sense that there is more churn in the early years of tenure as customers find services that best suit their situation or take advantage of a new customer deal. However, despite this early spike in churn, fiber optic customers consistently churn at a higher rate throughout all tenure lengths. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest coefficient in the model's decision function. It is this feature that should be addressed. 
+Fiber optic customers consistently churn at a higher rate throughout all tenure lengths. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), almost twice the next highest coefficient in the model's decision function. It is this feature that should be addressed. 
 
 #### Recommendations: 
- - Evaluate fiber optic customers' experience early and often. Themes in this customer feeback could point the company in a direction to better deter churn. 
+ - Conduct research in other fiber optic providers. There is likely a competitor providing this service to cusotmers faster, better, or cheaper.
  - Add data or begin tracking customers' location of service. Customers may be able to sign up even if fiber optic is not available in their area. Service outages causing churn may be geographically clustered. 
+ - Evaluate fiber optic customers' experience early and often. Themes in this customer feeback could point the company in a direction to better deter churn. 
 
 #### Next Steps:
  - Feature engineer sample populations where the cluster of churn is at for a collection of features. I would first isolate customers with low-tenure and high monthly charges and see how this additional identifier adjusted the model outcomes. 
