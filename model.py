@@ -241,3 +241,183 @@ def binary_logisticregression_data(X_train, y_train, penalty='l2'):
     odds['C'] = models['C']
         
     return models, odds
+
+
+def setup(train, val, test):
+    ''' This function takes in the train, validate, and test datasets and returns the 
+    adjusted X_train, y_train, X_val, y_val, X_test, y_test for the desired columns in
+    modeling for the telco classification project.
+    '''
+    # Drop columns with high chi-square p-value with churn
+    drop_cols = ['partner', 
+                 'dependents', 
+                 'phone_service', 
+                 'multiple_lines',
+                 'Bank transfer (automatic)',
+                 'Credit card (automatic)',
+                 'Electronic check',
+                 'Mailed check',
+                 # 'contract_type',
+                 'total_charges',
+                 # 'Fiber optic',
+                 # 'DSL',
+                 # 'monthly_charges',
+                 # 'paperless_billing',
+                 'gender'
+                 # 'senior_citizen'
+                 # 'tenure'
+                 # 'extras'
+    ]
+
+    train = train.drop(columns=drop_cols)
+    val = val.drop(columns=drop_cols)
+    test = test.drop(columns=drop_cols)
+
+    # Create model variables for train, validate, and test modeling
+    X_train = train.drop(columns=['churn', 'customer_id'])
+    y_train = train.churn
+    X_val = val.drop(columns=['churn', 'customer_id'])
+    y_val = val.churn
+    X_test = test.drop(columns=['churn', 'customer_id'])
+    y_test = test.churn
+    
+    return X_train, y_train, X_val, y_val, X_test, y_test
+
+
+def make_logit(X_train, y_train, X_val, y_val):
+    ''' This function takes in X_train, y_train, X_validate, y_validate and returns
+    the logistic regression model's accuracy and recall results for hyperparameters:
+     - C = 1.0
+     - frequency = 0.3
+     - random_state = 123
+    '''
+    # Make the logistic regression model
+    logit3 = LogisticRegression(random_state=123)
+    # Fit it to the train data
+    logit3.fit(X_train, y_train)
+
+    # Evaluate it with a 0.3 threshold 
+    y_pred_proba_train = logit3.predict_proba(X_train)
+    y_pred_proba_train = pd.DataFrame(y_pred_proba_train, columns = ['stayed', 'churned'])
+    y_pred_train = (y_pred_proba_train.churned > 0.3).astype(int)
+    logit_accuracy = met.accuracy_score(y_train, y_pred_train)
+    logit_recall = met.recall_score(y_train, y_pred_train)
+
+    y_pred_proba_val = logit3.predict_proba(X_val)
+    y_pred_proba_val = pd.DataFrame(y_pred_proba_val, columns = ['stayed', 'churned'])
+    y_pred_val = (y_pred_proba_val.churned > 0.3).astype(int)
+    val_acc = met.accuracy_score(y_val, y_pred_val)
+    val_recall = met.recall_score(y_val, y_pred_val)
+
+    # Put the results into a dataframe
+    logit_results = pd.DataFrame({'logit_results' : {'accuracy_train': logit_accuracy,
+                                                     'accuracy_validate' : val_acc,
+                                                     'recall_train': logit_recall,
+                                                     'recall_validate': val_recall,}
+                         })
+    return logit_results
+
+
+def make_forest(X_train, y_train, X_val, y_val):
+    ''' This function takes in X_train, y_train, X_validate, y_validate and returns
+    the random forest model's accuracy and recall results for hyperparameters:
+     - max_depth = 7
+     - min_samples_leaf = 3
+     - random_state = 123
+    '''
+    # Make the Random Forest model
+    forest23 = RandomForestClassifier(max_depth=7, min_samples_leaf=3, random_state=123)
+    # Fit it to the train data
+    forest23.fit(X_train, y_train)
+
+    # Evaluate and put the results in a dataframe
+    forest_results = pd.DataFrame({'forest_results' : {'accuracy_train': forest23.score(X_train, y_train),
+                                                       'accuracy_validate' : forest23.score(X_val, y_val),
+                                                       'recall_train': met.recall_score(y_train, forest23.predict(X_train)),
+                                                       'recall_validate': met.recall_score(y_val, forest23.predict(X_val))}
+                 })
+    return forest_results
+
+
+def make_knn(X_train, y_train, X_val, y_val):
+    ''' This function takes in X_train, y_train, X_validate, y_validate and returns
+    the K-nearest neighbor model's accuracy and recall results for hyperparameters:
+     - n-neighbors = 5
+     - weights = uniform
+    '''
+    # Make the KNN model
+    knn5 = KNeighborsClassifier(n_neighbors=5, weights='uniform')
+    # Fit it to the train data
+    knn5.fit(X_train, y_train)
+
+    # Evaluate and put the results in a dataframe
+    knn_results = pd.DataFrame({'knn_results' : {'accuracy_train': knn5.score(X_train, y_train),
+                                                 'accuracy_validate' : knn5.score(X_val, y_val),
+                                                 'recall_train': met.recall_score(y_train, knn5.predict(X_train)),
+                                                 'recall_validate': met.recall_score(y_val, knn5.predict(X_val))}
+                 })
+    return knn_results
+
+
+def run_best_test(X_train, y_train, X_val, y_val, X_test, y_test, test):
+    ''' This function takes in X_train, y_train, X_validate, y_validate, X_test, y_test, and test
+    and returns 3 items:
+    
+    1. The logistic regression model's accuracy and recall results for hyperparameters:
+     - C = 1.0
+     - frequency = 0.3
+     - random_state = 123
+     
+    2. The model's coefficient/weight on each feature in a dataframe. 
+    
+    3. The model's predictions on the test dataset. This is also saved into a local csv file.
+    '''
+    # Make the logistic regression model
+    logit3 = LogisticRegression()
+    # Fit it on the train data
+    logit3.fit(X_train, y_train)
+
+    # Evaluate it for each dataset: train, validate, test
+    y_pred_proba_train = logit3.predict_proba(X_train)
+    y_pred_proba_train = pd.DataFrame(y_pred_proba_train, columns = ['stayed', 'churned'])
+    y_pred_train = (y_pred_proba_train.churned > 0.3).astype(int)
+    logit_accuracy = met.accuracy_score(y_train, y_pred_train)
+    logit_recall = met.recall_score(y_train, y_pred_train)
+
+    y_pred_proba_val = logit3.predict_proba(X_val)
+    y_pred_proba_val = pd.DataFrame(y_pred_proba_val, columns = ['stayed', 'churned'])
+    y_pred_val = (y_pred_proba_val.churned > 0.3).astype(int)
+    val_acc = met.accuracy_score(y_val, y_pred_val)
+    val_recall = met.recall_score(y_val, y_pred_val)
+
+    y_pred_proba_test = logit3.predict_proba(X_test)
+    y_pred_proba_test = pd.DataFrame(y_pred_proba_test, columns = ['stayed', 'churned'])
+    y_pred_test = (y_pred_proba_test.churned > 0.3).astype(int)
+    test_acc = met.accuracy_score(y_test, y_pred_test)
+    test_recall = met.recall_score(y_test, y_pred_test)
+
+    # Put the results into a dataframe
+    best = pd.DataFrame({'logit3' : {'acc1_train': logit_accuracy,
+                             'acc2_val' : val_acc,
+                             'acc3_test' : test_acc,
+                             'recall1_train': logit_recall,
+                             'recall2_val': val_recall,
+                             'recall3_test': test_recall}})
+    
+    odds = np.exp(pd.DataFrame(logit3.coef_[0], index=X_train.columns, columns=['weight_of_feature']))
+    
+    # Create the columns
+    predict_stay = np.array(y_pred_proba_test.stayed)
+    predict_churn = np.array(y_pred_proba_test.churned)
+    churn_or_not = np.where(y_pred_test == 1, 'Churn', 'Stay')
+    customers = np.array(test.customer_id)
+
+    # Put it into a dataframe
+    predictions = pd.DataFrame([customers, predict_stay, predict_churn, churn_or_not]).T
+    # Clean up the column names
+    predictions.columns = ['customer', 'probability_of_staying', 'probability_of_churn', 'prediction']
+    # Send it to a local csv file
+    predictions.to_csv('predictions.csv',index=False)
+    # Show us the dataframe
+    
+    return best, odds, predictions
