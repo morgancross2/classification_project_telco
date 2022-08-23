@@ -187,25 +187,7 @@ def show_tenure(train):
     # Plot it as a histogram with a distribution line, create one bar per year
     sns.histplot(data=train[train.churn == 1], x='tenure', bins=72, color='sandybrown')
     plt.xlim(0,72)
-    # Create a box on where we are going in the next graph
-    plt.hlines(100,0,20, colors='red')
-    plt.hlines(.2,0,20, colors='red')
-    plt.vlines(.2,0,100, colors='red')
-    plt.vlines(20,0,100, colors='red')
-    # Give it a title
-    plt.title("Distribution of churning customers' tenure shows spike in early years")
-    plt.show()
-    
-    print("These two histographs show that customers churn the most early on in tenure. This makes sense with new customer deals expiring. There seems to be another drop off. Let's zoom in and look at the first 20 years of churning customers")
-    print()
-    
-    # Make the plot larger
-    plt.figure(figsize=(12,6))
-    # Plot it as a histogram with a distribution line, create one bar per year
-    sns.histplot(data=train[train.churn == 1], x='tenure', bins=72, color='sandybrown')
-    # Zoom into the box from the previous histogram
-    plt.xlim(0,20)
-    plt.ylim(0,100)
+
     # Give it a title
     plt.title("Distribution of churning customers' tenure shows spike in early years")
     plt.show()
