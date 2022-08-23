@@ -32,10 +32,21 @@ This project is designed to identify key drivers of customer churn and develop a
 
 -----
 ## Executive Summary:
-- The classification models created (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall.
-- The Logistic Regression model produced the best results at 79% recall. Maximizing recall will predict the most churning customers and minimize false negatives. This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
-- With more time, I predict feature engineering data to identify a subgroup of fiber optic users with high-monthly charges and low tenure would increase the model's recall rate.
-- I recommend conducting research in possible competitors offering fiber optic. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), over twice the next highest weight in the model's decision function. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
+Goals:
+- Identify drivers of churn
+- Build a model to delve into the root of the churning problem
+- Maximize recall in order to predict churning customers and minimize false negatives
+
+Key Findings:
+- High monthly charges, low tenure, and fiber optic are primary drivers of churn
+- The classification models (Logistic Regression, Random Forest, and KNeighbors) produced varying levels of accuracy and recall.
+
+Takeaways:
+- The Logistic Regression model produced the best results at 79% recall. 
+- This model is built to delve into the root of the problem, not to isolate predicted churning customers for targeted marketing. Follow on models before marketing campaigns are highly recommended. 
+
+Recommendation:
+- I recommend conducting research in possible competitors offering fiber optic. Despite churn overall declining as tenure increases, fiber optic customers are churning much more frequently at all tenures. This heavily suggests customers are leaving due to this service and it is likely it is being offered faster or for less.
 
 -----
 ## Data Dictionary:
@@ -186,6 +197,8 @@ Baseline Results
 - The baseline accuracy is 73.47%.
 
 Selected features to input into models:
+- contract_type
+- Fiber optic
 - DSL
 - monthly_charges
 - paperless_billing
@@ -219,16 +232,17 @@ The Logistic Regression model performed the best for recall.
 
 -----
 ## Conclusion:
-Fiber optic customers consistently churn at a higher rate throughout all tenure lengths. My best model evaluated the fiber optic feature to have a weight of 2.78 (the closer to 1, the less impact on churn), almost twice the next highest coefficient in the model's decision function. It is this feature that should be addressed. 
+Throughout customers' tenure, fiber optic customers are consistently churning at a higher rate. It is even more prevelent that this feature that should be addressed because my model is predicting churn with 78% recall and is weighing fiber optic at 2.78, almost twice the next highest feature in its decision function. 
 
 #### Recommendations: 
- - Conduct research in other fiber optic providers. There is likely a competitor providing this service to cusotmers faster, better, or cheaper.
+ - Conduct research on other fiber optic providers. There is likely a competitor providing this service to customers faster, better, or cheaper.
  - Add data or begin tracking customers' location of service. Customers may be able to sign up even if fiber optic is not available in their area. Service outages causing churn may be geographically clustered. 
  - Evaluate fiber optic customers' experience early and often. Themes in this customer feeback could point the company in a direction to better deter churn. 
 
 #### Next Steps:
- - Feature engineer sample populations where the cluster of churn is at for a collection of features. I would first isolate customers with low-tenure and high monthly charges and see how this additional identifier adjusted the model outcomes. 
+ - Feature engineer sample populations where the cluster of churn is at for a combination of features. Example: isolate customers with low-tenure and high monthly charges, add an identifier for this group, and see how this additional identifier adjusted the model outcomes. 
  - Feature engineer data to show the last added on service before churn and the difference in dates between the addition and churning. This information could shed light on a specific service lowering customer satisfaction.
+ - Develop a model focused on targeted marketing for predicted churning customers.
 
 -----
 ## How to Recreate:
