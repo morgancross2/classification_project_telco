@@ -100,6 +100,26 @@ def show_monthly_charges(train):
     axes[1].set_title("Closer Look at Spike in Churned Customers Monthly Charges")
 
     plt.show()
+    
+
+def show_feature(train):
+    # Create the frame
+    fig, axes = plt.subplots(2,1, figsize=(12,12))
+
+    # Give it a title
+    fig.suptitle('''Fiber Optic is Costly and Seen with Most Churning Customers''')
+    
+    # Change the colors to tell which is churn and which is not
+    fiber_stayed_colors = ['dimgray', 'steelblue']
+    fiber_churned_colors = ['dimgray', 'sandybrown']
+
+    # Plot it as a kdeplot, isolating fiber optic customers vs non-fiber optic customers
+    sns.kdeplot(ax=axes[0], data=train, x='monthly_charges', y='churn', hue='Fiber optic', palette=fiber_churned_colors)
+    axes[0].set_ylim(.5,1.5)
+    sns.kdeplot(ax=axes[1], data=train, x='monthly_charges', y='churn', hue='Fiber optic', palette=fiber_stayed_colors)
+    axes[1].set_ylim(-.5,.5)
+
+    plt.show()
 
     
 def show_fiber_optic(train):
@@ -107,8 +127,11 @@ def show_fiber_optic(train):
     in the telco churn project addressing fiber optic and churn.
     '''
     # plot the count of customers in the train dataset against the fiber optic feature
+    fiber_colors = ['dimgray', 'steelblue']
+    fiber_churn_colors = ['dimgray', 'sandybrown']
+
     plt.figure(figsize=(12,6))
-    sns.countplot(x='Fiber optic', data=train)
+    sns.countplot(x='Fiber optic', data=train, palette=fiber_colors)
     plt.title('Fiber Optic Customer Counts')
     plt.show()
 
@@ -131,7 +154,7 @@ def show_fiber_optic(train):
 
     # plot the feature fiber optic against the target of churn
     plt.figure(figsize=(12,6))
-    sns.barplot(data=train, x='Fiber optic', y='churn')
+    sns.barplot(data=train, x='Fiber optic', y='churn', palette=fiber_churn_colors)
 
     plt.title('Churn Rate for Fiber Optic Customers')
     plt.show()
@@ -162,7 +185,7 @@ def show_tenure(train):
     # Make the plot larger
     plt.figure(figsize=(12,6))
     # Plot it as a histogram with a distribution line, create one bar per year
-    sns.histplot(data=train[train.churn == 1], x='tenure', bins=72)
+    sns.histplot(data=train[train.churn == 1], x='tenure', bins=72, color='sandybrown')
     plt.xlim(0,72)
     # Create a box on where we are going in the next graph
     plt.hlines(100,0,20, colors='red')
@@ -179,7 +202,7 @@ def show_tenure(train):
     # Make the plot larger
     plt.figure(figsize=(12,6))
     # Plot it as a histogram with a distribution line, create one bar per year
-    sns.histplot(data=train[train.churn == 1], x='tenure', bins=72)
+    sns.histplot(data=train[train.churn == 1], x='tenure', bins=72, color='sandybrown')
     # Zoom into the box from the previous histogram
     plt.xlim(0,20)
     plt.ylim(0,100)
@@ -202,14 +225,18 @@ def show_combo(train):
     # Give titles to each smaller graph
     axes[0,0].set_title('Churned Customers vs Fiber Optic')
     axes[0,1].set_title('Churned Customers Over Tenure vs Fiber Optic')
-    axes[1,0].set_title('Kept Customers vs Fiber Optic')
-    axes[1,1].set_title('Kept Customers Over Tenure vs Fiber Optic')
+    axes[1,0].set_title('Non-Churn Customers vs Fiber Optic')
+    axes[1,1].set_title('Non-Churn Customers Over Tenure vs Fiber Optic')
+
+    # Make the colors differentiate the churned vs non-churned customers
+    fiber_stayed_colors = ['dimgray', 'steelblue']
+    fiber_churned_colors = ['dimgray', 'sandybrown']
 
     # Plot each quadrant't graph and give it a location to populate
-    sns.histplot(ax=axes[0,0], data=train[train.churn == 1], x='monthly_charges', hue='Fiber optic', kde=True)
+    sns.histplot(ax=axes[0,0], data=train[train.churn == 1], x='monthly_charges', hue='Fiber optic', kde=True, palette=fiber_churned_colors)
     axes[0,0].set_ylim(0,250)
-    sns.scatterplot(ax=axes[0,1], data=train[(train.churn == 1)], y='tenure', x='monthly_charges', hue='Fiber optic')
-    sns.histplot(ax=axes[1,0], data=train[train.churn == 0], x='monthly_charges', hue='Fiber optic', kde=True)
+    sns.scatterplot(ax=axes[0,1], data=train[(train.churn == 1)], y='tenure', x='monthly_charges', hue='Fiber optic', palette=fiber_churned_colors)
+    sns.histplot(ax=axes[1,0], data=train[train.churn == 0], x='monthly_charges', hue='Fiber optic', kde=True, palette=fiber_stayed_colors)
     axes[1,0].set_ylim(0,250)
-    sns.scatterplot(ax=axes[1,1], data=train[(train.churn == 0)], y='tenure', x='monthly_charges', hue='Fiber optic')
+    sns.scatterplot(ax=axes[1,1], data=train[(train.churn == 0)], y='tenure', x='monthly_charges', hue='Fiber optic', palette=fiber_stayed_colors)
     plt.show()

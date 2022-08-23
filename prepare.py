@@ -40,6 +40,10 @@ def prep_telco(telco):
     telco.streaming_tv = telco.streaming_tv.str.replace('No internet service', '0').str.replace('Yes', '1').str.replace('No', '0').astype('int')
     telco.streaming_movies = telco.streaming_movies.str.replace('No internet service', '0').str.replace('Yes', '1').str.replace('No', '0').astype('int')
     
+    # Feature engineer 'extras', a count of the add-on services available. 
+    telco['extras'] = telco['online_security'] + telco['online_backup']+telco['device_protection']+telco['tech_support']+ telco['streaming_tv']+telco['streaming_movies']
+    telco = telco.drop(columns=['online_security', 'online_backup', 'device_protection','tech_support','streaming_tv','streaming_movies'])
+    
     return telco
 
 
