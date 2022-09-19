@@ -3,6 +3,10 @@ by: Morgan Cross
 
 This project is designed to identify key drivers of customer churn and develop a model to best predict future customer churn. The results from this project arms telco business leaders and decision makers with a focused direction to best address these drivers and retain customers. 
 
+
+A Canva Presentation of this material can be found [here.](https://www.canva.com/design/DAFKRW7Uez4/E44XUzojHue9Q9n2ds76Xw/view?utm_content=DAFKRW7Uez4&utm_campaign=designshare&utm_medium=link&utm_source=recording_view)
+For just the slides, use [this one!](https://www.canva.com/design/DAFKRW7Uez4/6MFGLWBLbQqxpPV0AzdKUQ/view?utm_content=DAFKRW7Uez4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 -----
 ## Project Overview:
 
